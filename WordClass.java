@@ -1,11 +1,11 @@
 public class WordClass {
 
-	private String currentWord;
+	private String currentWord, main;
 	private static final String alphebet = "abcdefghijklmnopqrstuvwxyz";
 
 	WordClass() {}
 	WordClass(String dictFile) {
-
+		main = dictFile;
 	}
 
 	public void setCurrentWord(String word) {
@@ -43,9 +43,17 @@ public class WordClass {
 		return Character.toString(ch);
 	}
 	public static boolean contains(char p, String whole) {
-		for(int n=0; n < whole.length(); n++) {
+		/*for(int n=0; n < whole.length(); n++) {
 			if(whole.charAt(n)==p) return true;
 		}
-		return false;
+		return false;*/
+		return whole.contains(Character.toString(p));
 	}
+	public boolean contains(String part) {
+		return main.contains(part);
+	}
+	public static boolean contains(String part, String whole) {
+		return whole.contains(part);
+	}
+
 }
