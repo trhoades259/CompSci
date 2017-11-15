@@ -5,7 +5,16 @@ public class WordClass {
 
 	WordClass() {}
 	WordClass(String dictFile) {
-		main = dictFile;
+		int wordCount=0;
+		boolean spaceTest;
+		for(int n=0; dictFile.length(); n++) {
+			if (!alphebet.contains(dictFile.charAt(n))||(dictFile.charAt(n)=='\'')) spaceTest = true;
+			else if (spaceTest==true || n==0) {
+					wordCount++;
+					spaceTest = false;
+				}
+			}
+		}
 	}
 
 	public void setCurrentWord(String word) {
