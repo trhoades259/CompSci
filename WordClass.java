@@ -2,17 +2,24 @@ public class WordClass {
 
 	private String currentWord, main;
 	private static final String alphebet = "abcdefghijklmnopqrstuvwxyz";
+	private String[] library;
 
 	WordClass() {}
 	WordClass(String dictFile) {
-		int wordCount=0;
-		boolean spaceTest;
-		for(int n=0; dictFile.length(); n++) {
-			if (!alphebet.contains(dictFile.charAt(n))||(dictFile.charAt(n)=='\'')) spaceTest = true;
-			else if (spaceTest==true || n==0) {
-					wordCount++;
-					spaceTest = false;
+		library = new String[wordCount(dictFile)];
+		int c = 0, wordStart = 0;
+		boolean spaceTest = false;
+		for(int n=0; n<dictFile.length(); n++) {
+			if (!alphebet.contains(Character.toString(dictFile.charAt(n)))) {
+				if(!spaceTest) {
+					spaceTest = true;
+					library[c] = dictFile.substring(wordStart,n);
+					c++;
 				}
+			}
+			else if(spaceTest || n==0) {
+				spaceTest = false;
+				wordStart=n;
 			}
 		}
 	}
@@ -63,6 +70,24 @@ public class WordClass {
 	}
 	public static boolean contains(String part, String whole) {
 		return whole.contains(part);
+	}
+	public static int wordCount(String in) {
+		in+=" ";
+		int wordCount=0, wordStart=0;
+		boolean spaceTest = false;
+		for(int n=0; n<in.length(); n++) {
+			if (!alphebet.contains(Character.toString(in.charAt(n)))&&(in.charAt(n)!='\'')) {
+				spaceTest = true;
+			}
+			else if (spaceTest==true || n==0) {
+				wordCount++;
+				spaceTest = false;
+			}
+		}
+		return wordCount;
+	}
+	public String[] getLibrary() {
+		return library;
 	}
 
 }
