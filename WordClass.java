@@ -110,5 +110,38 @@ public class WordClass {
 		for(int n=0; n<mod.length(); n++) returnString+=(Character.toLowerCase(mod.charAt(n)));
 		return returnString;
 	}
-
+	public String getRandomWord() {
+		Random rand = new Random();
+		return library[rand.nextInt(library.length)];
+	}
+	public static int howManyOf(char ch, String whole) {
+		int counter=0;
+		for(int n=0; n<whole.length(); n++) if(whole.charAt(n)==ch) counter++;
+		return counter;
+	}
+	public static int howManyOf(String part, String whole) {
+			int counter=0;
+			for(int n=0; n<(whole.length()-part.length()+1); n++) if((part).equals(whole.substring(n,part.length()))) counter++;
+			return counter;
+	}
+	public int indexAt(char ch) {
+		return indexAt(0,ch,currentWord);
+	}
+	public int indexAt(char ch, int place) {
+		return indexAt(place,ch,currentWord);
+	}
+	public static int indexAt(char ch, String str) {
+		return indexAt(0,ch,str);
+	}
+	public static int indexAt(int num, char ch, String str) {
+			for(int n=num; n<str.length(); n++) if(str.charAt(n)==ch) return n;
+			return -1;
+	}
+	public static int indexAt(int num, String part, String whole) {
+		for(int n=num; n<(whole.length()-part.length()+1); n++) if((part).equals(whole.substring(n,part.length()))) return n;
+		return -1;
+	}
+	public static int indexAt(String part, String whole) {
+		return indexAt(0,part,whole);
+	}
 }
