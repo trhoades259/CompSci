@@ -1,23 +1,26 @@
+import java.util.*;
+
 public class WordClass {
 
-	private String currentWord, main;
+	private String currentWord;
 	private static final String alphebet = "abcdefghijklmnopqrstuvwxyz";
 	private String[] library;
 
 	WordClass() {}
 	WordClass(String dictFile) {
+		dictFile+=" ";
 		library = new String[wordCount(dictFile)];
-		int c = 0, wordStart = 0;
-		boolean spaceTest = false;
+		int wordCount=0, wordStart=0, c=0;
+		boolean spaceTest = true;
 		for(int n=0; n<dictFile.length(); n++) {
-			if (!alphebet.contains(Character.toString(dictFile.charAt(n)))) {
+			if (!alphebet.contains(Character.toString(Character.toLowerCase(dictFile.charAt(n))))) {
 				if(!spaceTest) {
 					spaceTest = true;
-					library[c] = dictFile.substring(wordStart,n);
+					library[c] = WordClass.toLowercase(dictFile.substring(wordStart,n));
 					c++;
 				}
 			}
-			else if(spaceTest || n==0) {
+			else if(spaceTest) {
 				spaceTest = false;
 				wordStart=n;
 			}
@@ -59,14 +62,11 @@ public class WordClass {
 		return Character.toString(ch);
 	}
 	public static boolean contains(char p, String whole) {
-		/*for(int n=0; n < whole.length(); n++) {
-			if(whole.charAt(n)==p) return true;
-		}
-		return false;*/
 		return whole.contains(Character.toString(p));
 	}
 	public boolean contains(String part) {
-		return main.contains(part);
+		for(int n=0; n<library.length; n++) if(library[n].contains(part)) return true;
+		return false;
 	}
 	public static boolean contains(String part, String whole) {
 		return whole.contains(part);
@@ -76,7 +76,7 @@ public class WordClass {
 		int wordCount=0, wordStart=0;
 		boolean spaceTest = false;
 		for(int n=0; n<in.length(); n++) {
-			if (!alphebet.contains(Character.toString(in.charAt(n)))&&(in.charAt(n)!='\'')) {
+			if (!alphebet.contains(Character.toString(Character.toLowerCase(in.charAt(n))))) {
 				spaceTest = true;
 			}
 			else if (spaceTest==true || n==0) {
@@ -88,6 +88,27 @@ public class WordClass {
 	}
 	public String[] getLibrary() {
 		return library;
+	}
+	public String[] differsBy(String word, int quan) {
+		Set<String> returnArray = new HashSet<String>();
+		String[] ofLength = getWordsOfLength(word.length());
+		for(int n=0; n<ofLength.length; n++) {
+			int difference = 0;
+			for(int i=0; i<ofLength[n].length(); i++) if(ofLength[n].charAt(i)!=word.charAt(i)) difference++;
+			if(difference<=quan) returnArray.add(ofLength[n]);
+		}
+		return (returnArray.toArray(new String[returnArray.size()]));
+
+	}
+	public String[] getWordsOfLength(int length) {
+		Set<String> returnArray = new HashSet<String>();
+		for(int n=0; n<library.length; n++) if(library[n].length()==length) returnArray.add(library[n]);
+		return (returnArray.toArray(new String[returnArray.size()]));
+	}
+	public static String toLowercase(String mod) {
+		String returnString="";
+		for(int n=0; n<mod.length(); n++) returnString+=(Character.toLowerCase(mod.charAt(n)));
+		return returnString;
 	}
 
 }

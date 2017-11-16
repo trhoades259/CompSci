@@ -3,7 +3,7 @@ class testing {
 		System.out.println("print something nibba: ");
 		EasyReader in = new EasyReader();
 		WordClass a = new WordClass(in.readLine());
-		String[] b = a.getLibrary();
-		for(int n=0; n < b.length; n++) System.out.println(b[n]);
+		String[] b = a.differsBy("hi", 1);
+		for(int n=0; n<b.length; n++) System.out.println(b[n]);
 	}
 }
