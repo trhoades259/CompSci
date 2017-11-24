@@ -4,7 +4,7 @@ class EygptianFractions {
 		EasyReader in = new EasyReader();
 		Fraction frac = new Fraction(in.readLine());
 		int n=1;
-		System.out.print(frac.showFrac()+"= ");
+		System.out.print(frac.showFrac()+" = ");
 		while(frac.showNum()!=0) {
 			n++;
 			Fraction compare = new Fraction("1/"+n);
