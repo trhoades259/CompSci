@@ -37,10 +37,10 @@ class Pe {
     	System.out.println(Math.toDegrees(getAngle(x,y))+"\t"+getMagnitude(x,y)+"\t");
 	}
 	public static double angleDriveLeft(double x, double y) {
-	    return Math.sin(getAngle(x,y)-Math.PI/4)*getMagnitude(x,y);
+	    return Math.sin(getAngle(x,y)+Math.PI/4)*getMagnitude(x,y);
 	}
 	public static double angleDriveRight(double x, double y) {
-	    return Math.cos(getAngle(x,y)-Math.PI/4)*getMagnitude(x,y);
+	    return Math.cos(getAngle(x,y)+Math.PI/4)*getMagnitude(x,y);
     }
     public static double getAngle(double x, double y){
 	    return Math.atan2(-y,x);
