@@ -26,7 +26,7 @@ class Long {
 				p = r;
 			}
 			for (int d = 0; d < 25; d++) {
-				if ( > m) m = c;
+				if (c > m) m = c;
 			}
 		}
 		for (int m = 0; m < 25; m++) if(g[m]==1) g[m]--;

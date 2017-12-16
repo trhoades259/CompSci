@@ -16,6 +16,9 @@ public class Histogram {
 	public static void printSpace(int max) {
 		for(int i = 0; i < max; i++) System.out.print(" ");
 	}
+	public static void printSymbol(char c, int n) {
+		for(int i = 0; i < n; i++) System.out.print(Character.toString(c));
+	}
 	public static int count(int[] a, int v) {
 		int c = 0;
 		for(int n = 0; n < a.length; n++) if(a[n]==v) c++;
