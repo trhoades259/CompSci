@@ -16,6 +16,6 @@ public class Bank {
 		else balance -= with;
 	}
 	public void addInterest(int n, double rp, double t) {
-		balance = balance*Math.pow(1+((rp/100)/n),n*t);
+		balance = balance*Math.pow(1+((rp/100.0)/n),n*t);
 	}
 }
