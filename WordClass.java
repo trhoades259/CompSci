@@ -195,13 +195,26 @@ public class WordClass {
 		return library.size();
 	}
 	public void cleanArray() {
+
+		for(int i=0; i<library.size()-1; i++) {
+			String hold = "";
+			for(int n=0; n<library.get(i).length(); n++) {
+				if(Character.isLetter(library.get(i).charAt(n)) || library.get(i).charAt(n)=='\'') hold+=Character.toLowerCase(library.get(i).charAt(n));
+			}
+			library.set(i,hold);
+		}
+
+
+
+
+		/*
 		for(int n=0; n<library.size(); n++) {
 			String hold="";
 			for(int i=0; i<library.get(n).length(); i++) {
 				if(Character.isLetter(library.get(n).charAt(i))||library.get(n).charAt(i)=='\'') hold+=lower(library.get(n).charAt(i));
 			}
 			library.set(n,hold);
-		}
+		}*/
 	}
 	public String[] getWordsOfLength(int length) {
 		ArrayList<String> returnArray = new ArrayList<String>();
@@ -232,5 +245,13 @@ public class WordClass {
 		Arrays.sort(lib);
 		library.clear();
 		for(int n=0; n<lib.length; n++) library.add(lib[n]);
+	}
+	public static void cleanFile(String fileName) {
+		EasyReader read = new EasyReader(fileName);
+		ArrayList<String> words = new ArrayList<String>(), hold = new ArrayList<String>();
+		while(!read.eof()) words.add(read.readWord());
+		for(int n=0; n<words.size(); n++) hold.add(words.get(n).replaceAll("[^A-Za-z,\']",""));
+		EasyWriter write = new EasyWriter(fileName);
+		for(int n=0; n<hold.size(); n++) write.println(hold.get(n));
 	}
 }
