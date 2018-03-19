@@ -14,4 +14,3 @@ ink
 led
 rim
 door
-
