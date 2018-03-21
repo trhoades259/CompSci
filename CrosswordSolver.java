@@ -23,8 +23,8 @@ class CrosswordSolver {
 		boolean[][] mod = new boolean[width][length];
 		char check;
 		puzzleFile = new EasyReader(puzzleName);
-		for(int x=0; x<width; x++) {
-			for(int y=0; y<length; y++) {
+		for(int y=0; y<length; y++) {
+			for(int x=0; x<width; x++) {
 				while(true) {
 					check = puzzleFile.readChar();
 					if(!Character.isWhitespace(check)) break;
