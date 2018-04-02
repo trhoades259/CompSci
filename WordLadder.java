@@ -18,8 +18,6 @@ class WordLadder {
 		uppercase = "";
 		for(int charIndex = 0; charIndex < wordEnd.length(); charIndex++) uppercase+=Character.toString(Character.toUpperCase(wordEnd.charAt(charIndex)));
 		wordEnd = uppercase;
-		System.out.println("------------------");
-		System.out.println(wordStart);
 
 		EasyReader dictFile = new EasyReader("BigDict.txt");
 		ArrayList<String> words = new ArrayList<String>();
@@ -40,6 +38,7 @@ class WordLadder {
 		String alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 		int hitCounter = 0;
 		while(!ladder.get(ladder.size()-1).equals(wordEnd)) {
+			System.out.print(".");
 			if(hitCounter > 1000) {
 				ladder.clear();
 				ladder.add(wordStart);
@@ -57,7 +56,6 @@ class WordLadder {
 				for(int wordIndex=0; wordIndex<words.size(); wordIndex++) {
 					if(words.get(wordIndex).equals(check)) {
 						ladder.add(check);
-						System.out.println(check);
 						hits[charIndex] = true;
 						end = true;
 						break;
@@ -73,7 +71,6 @@ class WordLadder {
 						if(charTest>charIndex) break;
 						if(charTest==charIndex) {
 							while(true) {
-
 								index = rand.nextInt(wordStart.length());
 								if(hits[index]) continue;
 								chr = alpha.charAt(rand.nextInt(26));
@@ -82,7 +79,6 @@ class WordLadder {
 								for(int wordIndex=0; wordIndex<words.size(); wordIndex++) {
 									if(words.get(wordIndex).equals(check)) {
 										ladder.add(check);
-										System.out.println(check);
 										end = true;
 										break;
 									}
@@ -93,8 +89,30 @@ class WordLadder {
 					}
 				}
 			}
-			if(end) continue;
 		}
+
+		for(int ladderIndex=0; ladderIndex<ladder.size(); ladderIndex++) {
+			for(int wordIndex=0; (ladder.size()-1-wordIndex)>ladderIndex; wordIndex++) {
+				if(ladder.get(ladderIndex).equals(ladder.get(ladder.size()-1-wordIndex))) {
+					for(int removeCounter=(ladder.size()-1-wordIndex-ladderIndex); removeCounter>0; removeCounter--) ladder.remove(ladderIndex+1);
+				}
+			}
+		}
+
+		int matchCounter;
+		for(int ladderIndex=0; ladderIndex<ladder.size()-2; ladderIndex++) {
+			matchCounter = 0;
+			for(int charIndex=0; charIndex<wordStart.length(); charIndex++) if(ladder.get(ladderIndex).charAt(charIndex)==ladder.get(ladderIndex+2).charAt(charIndex)) matchCounter++;
+			if(matchCounter==(wordStart.length()-1)) {
+				ladder.remove(ladderIndex+1);
+				ladderIndex--;
+			}
+		}
+
+		System.out.println();
+		for(int ladderIndex=0; ladderIndex<ladder.size(); ladderIndex++) System.out.println(ladder.get(ladderIndex));
+		System.out.println("Ladder length: "+ladder.size());
+
 	}
 
 	public static String replaceChar(String origin, int index, char chr) {
