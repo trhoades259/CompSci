@@ -54,11 +54,15 @@ class PhoneNumbersFull {
 		for(int i=0; i<sub.size(); i++) ltrCombos*=(sub.get(i).size());
 		System.out.println("\nNumber of possible letter combinations: "+ltrCombos);
 
-		/*
+
 		ArrayList<String> matches = new ArrayList<String>(), words;
+		ArrayList<ArrayList<Character>> set;
 		EasyReader dictFile;
 		String check, mod;
+		int size;
 		for(int y=0; y<letters.size(); y++) {
+			set = letters.get(y);
+			size = set.size();
 			for(int t=2; t<=size; t++) {
 				dictFile = new EasyReader("BigDict.txt");
 				words = new ArrayList<String>();
@@ -75,7 +79,7 @@ class PhoneNumbersFull {
 						fail = false;
 						temp = words.get(w);
 						for(int i=s; i<t+s; i++) {
-							curr = letters.get(i);
+							curr = set.get(i);
 							l = curr.size();
 							tmp = temp.charAt(i-s);
 							for(int c=0; c<l; c++) {
@@ -102,7 +106,7 @@ class PhoneNumbersFull {
 			for(String s: matches) System.out.println(s);
 		}
 		System.out.println();
-		*/
+
 	}
 
 	public static ArrayList<Character> newList(ArrayList<Character> list) {
